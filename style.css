@@ -1,0 +1,4 @@
+table , td , th{
+    border: 1pt solid black;
+    margin: 10px;
+}

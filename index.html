@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Expense Tracker</title>
+</head>
+
+<body>
+    <h1> Expense Manager</h1>
+    <div class="inputElements">
+        <select id="typeBox">
+            <option value="--"> -- </option>
+            <option value="card"> card </option>
+            <option value="cash"> Cash </option>
+            <option value="othe"> other </option>
+        </select>
+        <input id="nameBox" type="text" value="" placeholder="Enter the expense name" />
+        <input id="dateBox" type="date" />
+        <input id="amountBox" type="number" value="0" min="0" />
+        <button id="addElementButton"> Add Expense</button>
+    </div>
+    <div>
+        <table id="expenseTable">
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Clear</th>
+
+            </tr>
+            <tr id="tempRow">
+                <td colspan="5">
+                    Your added items will show up here!
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</body>
+<script src="code.js">
+
+</script>
+
+</html>
