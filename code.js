@@ -1,4 +1,7 @@
 const EXPENSE_KEY = "expenseList";
+getExpenseDataFromLocalStorage();
+deleteTempRow();
+
 
 let addItemButton = document.getElementById("addElementButton");
 addItemButton.addEventListener("click", function () {
@@ -20,9 +23,8 @@ addItemButton.addEventListener("click", function () {
         alert("the amount should be greater than 0")
     }
     else {
-        deleteTempRow();
         addExpenseToTable(typeOfExpense.value, nameOfExpense.value, dateOfExpense.value, amountOfExpense.value);
-        storeExpenseToLocalStorage(typeOfExpense, nameOfExpense, dateOfExpense, amountOfExpense);
+        storeExpenseDataToLocalStorage(typeOfExpense, nameOfExpense, dateOfExpense, amountOfExpense);
         clearInputText();
 
     }
@@ -37,13 +39,12 @@ function addExpenseToTable(type, name, date, amount, remove) {
     let cell2 = newRow.insertCell();
     let cell3 = newRow.insertCell();
     let cell4 = newRow.insertCell();
-    let cell5 = newRow.insertCell();
 
     cell1.innerHTML = type;
     cell2.innerHTML = name;
     cell3.innerHTML = date;
     cell4.innerHTML = amount;
-    cell5.innerHTML = remove;
+
 
 }
 
@@ -58,10 +59,10 @@ function clearInputText() {
     document.getElementById("typeBox").value = "";
     document.getElementById("nameBox").value = "";
     document.getElementById("dateBox").value = "";
-    document.getElementById("amountBox").value ="";
+    document.getElementById("amountBox").value = "";
 }
 
-function storeExpenseToLocalStorage(typeOfExpense, nameOfExpense, dateOfExpense, amountOfExpense) {
+function storeExpenseDataToLocalStorage(typeOfExpense, nameOfExpense, dateOfExpense, amountOfExpense) {
     let expenseLocalStorage = localStorage.getItem(EXPENSE_KEY);
     if (expenseLocalStorage == null) {
         expenseLocalStorage = [];
@@ -70,4 +71,22 @@ function storeExpenseToLocalStorage(typeOfExpense, nameOfExpense, dateOfExpense,
     }
     expenseLocalStorage.push({ theType: typeOfExpense.value }, { theName: nameOfExpense.value }, { theDate: dateOfExpense.value }, { theAmount: amountOfExpense.value })
     localStorage.setItem(EXPENSE_KEY, JSON.stringify(expenseLocalStorage));
+}
+
+function getExpenseDataFromLocalStorage() {
+    let expenseLocalStorage = localStorage.getItem(EXPENSE_KEY);
+    if (expenseLocalStorage !== null) {
+        expenseLocalStorage = JSON.parse(expenseLocalStorage);
+        for (i = 0; i < expenseLocalStorage.length; i++) {
+            type = expenseLocalStorage[i].theType;
+            name = expenseLocalStorage[i].theName;
+            date = expenseLocalStorage[i].theDate;
+            amount = expenseLocalStorage[i].theAmount;
+
+            addExpenseToTable(type, name, date, amount);
+
+
+        }
+    }
+
 }
